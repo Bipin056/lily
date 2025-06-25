@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lily Moderation - Professional Discord Bot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="text-center">
+                <h1 class="text-5xl font-bold mb-4">🌸 Lily Moderation</h1>
+                <p class="text-xl opacity-90">Professional Discord Moderation System</p>
+                <div class="mt-8">
+                    <span class="inline-block bg-green-500 text-white px-4 py-2 rounded-full">
+                        <i class="fas fa-circle text-green-300 mr-2"></i>Online & Active
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose Lily?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
+                    <div class="text-purple-500 text-4xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Advanced Security</h3>
+                    <p class="text-gray-600">Role-based permission system with 5-tier access control for maximum security.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
+                    <div class="text-blue-500 text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Professional Dashboard</h3>
+                    <p class="text-gray-600">Real-time statistics, moderation insights, and comprehensive management tools.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-lg shadow-lg card-hover">
+                    <div class="text-green-500 text-4xl mb-4">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Fair Appeal System</h3>
+                    <p class="text-gray-600">Integrated appeal process with form submission and review workflow.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Commands Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Command Overview</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-red-600">🔨 Moderation Commands</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!warn @user [reason]</code> - Issue warning</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!ban @user [reason]</code> - Ban member</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!kick @user [reason]</code> - Kick member</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!mute @user [minutes]</code> - Timeout member</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!unban [userID]</code> - Unban member</li>
+                    </ul>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-lg">
+                    <h3 class="text-xl font-bold mb-4 text-blue-600">📊 Management Commands</h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!dashboard</code> - Staff dashboard</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!stats</code> - Moderation statistics</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!userinfo @user</code> - User profile</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!serverinfo</code> - Server overview</li>
+                        <li><code class="bg-gray-200 px-2 py-1 rounded">!appeal</code> - Appeal form access</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appeal Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold mb-8">Need to Submit an Appeal?</h2>
+            <p class="text-xl mb-8 opacity-90">We believe in fair moderation and second chances.</p>
+            <a href="https://forms.gle/UyogvAGTQiDCbP2J6" target="_blank" class="bg-white text-purple-600 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition">
+                📝 Submit Appeal Form
+            </a>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Live Statistics</h2>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow text-center">
+                    <div class="text-3xl font-bold text-purple-600" id="serverCount">-</div>
+                    <div class="text-gray-600">Servers Protected</div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow text-center">
+                    <div class="text-3xl font-bold text-blue-600" id="memberCount">-</div>
+                    <div class="text-gray-600">Members Served</div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow text-center">
+                    <div class="text-3xl font-bold text-green-600" id="uptime">-</div>
+                    <div class="text-gray-600">Uptime</div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow text-center">
+                    <div class="text-3xl font-bold text-red-600" id="actionsToday">-</div>
+                    <div class="text-gray-600">Actions Today</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2025 Lily Moderation System. Professional Discord Security.</p>
+            <div class="mt-4">
+                <a href="/admin" class="text-purple-400 hover:text-purple-300 mx-2">Admin Panel</a>
+                <a href="/appeal" class="text-purple-400 hover:text-purple-300 mx-2">Submit Appeal</a>
+                <a href="#" class="text-purple-400 hover:text-purple-300 mx-2">Documentation</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simulate live stats (in production, these would come from your bot's API)
+        document.getElementById('serverCount').textContent = '1';
+        document.getElementById('memberCount').textContent = '1,000+';
+        document.getElementById('uptime').textContent = '99.9%';
+        document.getElementById('actionsToday').textContent = '12';
+
+        // Appeals are now handled by the direct Google Form link
+    </script>
+</body>
+</html>
