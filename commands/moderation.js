@@ -29,10 +29,118 @@ function sendMinimalEmbed(message, content) {
 }
 
 module.exports = {
-    ban: { /* unchanged */ },
-    kick: { /* unchanged */ },
-    mute: { /* unchanged */ },
+    ban: {
+    name: 'ban',
+    description: 'Ban a member',
+    async execute(message, args) {
+        if (!canUseCommand(message.member, 'ban')) {
+            const reply = await sendMinimalEmbed(message, '❌ You do not have permission.');
+            return deleteMessages(message, reply);
+        }
 
+        const member = message.mentions.members.first();
+        const reason = args.slice(1).join(' ') || 'No reason';
+
+        if (!member) {
+            const reply = await sendMinimalEmbed(message, '❌ Mention someone to ban.');
+            return deleteMessages(message, reply);
+        }
+
+        try {
+            await member.send({
+                embeds: [{
+                    title: 'You have been banned',
+                    description: `You were banned from ${message.guild.name}.\nReason: ${reason}`,
+                    color: 0xff0000
+                }],
+                components: [{
+                    type: 1,
+                    components: [{
+                        type: 2,
+                        label: 'Submit Appeal',
+                        style: 5,
+                        url: 'https://forms.gle/ikqag2LDvputPLhK7'
+                    }]
+                }]
+            });
+        } catch {}
+
+        try {
+            await member.ban({ reason });
+            const botMsg = await sendMinimalEmbed(message, `✅ Banned ${member.user.tag}`);
+            deleteMessages(message, botMsg);
+        } catch {
+            const reply = await sendMinimalEmbed(message, '❌ Failed to ban.');
+            deleteMessages(message, reply);
+        }
+    }
+},
+
+kick: {
+    name: 'kick',
+    description: 'Kick a member',
+    async execute(message, args) {
+        if (!canUseCommand(message.member, 'kick')) {
+            const reply = await sendMinimalEmbed(message, '❌ You do not have permission.');
+            return deleteMessages(message, reply);
+        }
+
+        const member = message.mentions.members.first();
+        const reason = args.slice(1).join(' ') || 'No reason';
+
+        if (!member) {
+            const reply = await sendMinimalEmbed(message, '❌ Mention someone to kick.');
+            return deleteMessages(message, reply);
+        }
+
+        try {
+            await member.send(`You have been kicked from ${message.guild.name}.\nReason: ${reason}`).catch(() => {});
+            await member.kick(reason);
+            const botMsg = await sendMinimalEmbed(message, `✅ Kicked ${member.user.tag}`);
+            deleteMessages(message, botMsg);
+        } catch {
+            const reply = await sendMinimalEmbed(message, '❌ Failed to kick.');
+            deleteMessages(message, reply);
+        }
+    }
+},
+
+mute: {
+    name: 'mute',
+    description: 'Timeout a member',
+    async execute(message, args) {
+        if (!canUseCommand(message.member, 'mute')) {
+            const reply = await sendMinimalEmbed(message, '❌ You do not have permission.');
+            return deleteMessages(message, reply);
+        }
+
+        const member = message.mentions.members.first();
+        const timeInput = args[1] || '5m';
+        const durationMs = parseDuration(timeInput);
+
+        if (!member) {
+            const reply = await sendMinimalEmbed(message, '❌ Mention someone to mute.');
+            return deleteMessages(message, reply);
+        }
+
+        if (message.guild.ownerId !== message.member.id) {
+            if (member.roles.highest.position >= message.member.roles.highest.position) {
+                const reply = await sendMinimalEmbed(message, '❌ You cannot mute someone with an equal or higher role.');
+                return deleteMessages(message, reply);
+            }
+        }
+
+        try {
+            await member.send(`You have been muted in ${message.guild.name} for ${timeInput}.`).catch(() => {});
+            await member.timeout(durationMs, 'Muted by moderator');
+            const botMsg = await sendMinimalEmbed(message, `✅ Muted ${member.user.tag} for ${timeInput}`);
+            deleteMessages(message, botMsg);
+        } catch {
+            const reply = await sendMinimalEmbed(message, '❌ Failed to mute.');
+            deleteMessages(message, reply);
+        }
+    }
+},
     warn: {
         name: 'warn',
         description: 'Warn a member',
