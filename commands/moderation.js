@@ -24,9 +24,32 @@ module.exports = {
 
             const member = message.mentions.members.first();
             const reason = args.slice(1).join(' ') || 'No reason';
+
             if (!member) {
                 const reply = await message.reply('❌ Mention someone to ban.');
                 return setTimeout(() => reply.delete().catch(() => {}), 5000);
+            }
+
+            try {
+                await member.send({
+                    embeds: [{
+                        title: 'You have been banned',
+                        description: `You were banned from ${message.guild.name}.
+Reason: ${reason}`,
+                        color: 0xff0000
+                    }],
+                    components: [{
+                        type: 1,
+                        components: [{
+                            type: 2,
+                            label: 'Submit Appeal',
+                            style: 5,
+                            url: 'https://forms.gle/ikqag2LDvputPLhK7'
+                        }]
+                    }]
+                });
+            } catch (err) {
+                console.log(`Couldn't send ban DM to ${member.user.tag}`);
             }
 
             try {
@@ -54,12 +77,15 @@ module.exports = {
 
             const member = message.mentions.members.first();
             const reason = args.slice(1).join(' ') || 'No reason';
+
             if (!member) {
                 const reply = await message.reply('❌ Mention someone to kick.');
                 return setTimeout(() => reply.delete().catch(() => {}), 5000);
             }
 
             try {
+                await member.send(`You have been kicked from ${message.guild.name}.
+Reason: ${reason}`).catch(() => {});
                 await member.kick(reason);
                 const botMsg = await message.channel.send(`✅ Kicked ${member.user.tag}`);
                 setTimeout(() => {
@@ -84,12 +110,14 @@ module.exports = {
 
             const member = message.mentions.members.first();
             const minutes = parseInt(args[1]) || 5;
+
             if (!member) {
                 const reply = await message.reply('❌ Mention someone to mute.');
                 return setTimeout(() => reply.delete().catch(() => {}), 5000);
             }
 
             try {
+                await member.send(`You have been muted in ${message.guild.name} for ${minutes} minutes.`).catch(() => {});
                 await member.timeout(minutes * 60 * 1000, 'Muted by moderator');
                 const botMsg = await message.channel.send(`✅ Muted ${member.user.tag} for ${minutes} min`);
                 setTimeout(() => {
@@ -143,6 +171,7 @@ module.exports = {
 
             const member = message.mentions.members.first();
             const reason = args.slice(1).join(' ') || 'No reason';
+
             if (!member) {
                 const reply = await message.reply('❌ Mention someone to warn.');
                 return setTimeout(() => reply.delete().catch(() => {}), 5000);
@@ -152,6 +181,11 @@ module.exports = {
             if (!data[member.id]) data[member.id] = [];
             data[member.id].push({ reason, date: new Date().toISOString(), mod: message.author.id });
             saveWarnings(data);
+
+            try {
+                await member.send(`You have been warned in ${message.guild.name}.
+Reason: ${reason}`).catch(() => {});
+            } catch {}
 
             const botMsg = await message.channel.send(`✅ Warned ${member.user.tag}`);
             setTimeout(() => {
@@ -177,7 +211,7 @@ module.exports = {
 
             if (userWarnings.length === 0) return message.reply('✅ No warnings.');
 
-            let msg = `📄 Warnings for **${member.user.tag}**:\n`;
+            let msg = `Warnings for **${member.user.tag}**:\n`;
             userWarnings.forEach((w, i) => {
                 msg += `\`${i + 1}.\` ${w.reason} (by <@${w.mod}>)\n`;
             });
