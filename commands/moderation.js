@@ -135,12 +135,14 @@ mute: {
             await member.timeout(durationMs, 'Muted by moderator');
             const botMsg = await sendMinimalEmbed(message, `✅ Muted ${member.user.tag} for ${timeInput}`);
             deleteMessages(message, botMsg);
-        } catch {
+        } catch (error) {
+            console.error('Mute error:', error);
             const reply = await sendMinimalEmbed(message, '❌ Failed to mute.');
             deleteMessages(message, reply);
         }
     }
 },
+
     warn: {
         name: 'warn',
         description: 'Warn a member',
