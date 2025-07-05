@@ -23,15 +23,15 @@ function hasPermission(message, allowedRoleIds) {
 /**
  * Get user's permission level based on their roles
  * @param {GuildMember} member - Discord guild member object
- * @returns {string} - Permission level: 'owner', 'mod', 'jr_mod', 'staff', 'member'
+ * @returns {string} - Permission level: 'nirmaata', 'co_owner', 'moderator', 'jr_moderator', 'staff', 'member'
  */
 function getPermissionLevel(member) {
     if (!member) return 'member';
     
     const userRoleIds = member.roles.cache.map(role => role.id);
     
-    // Owner
-    if (userRoleIds.includes('1369700079719420015')) return 'owner';
+    // 🦚 Nirmaata (Actual owner now)
+    if (userRoleIds.includes('1378982362355859498')) return 'nirmaata';
     
     // Co-Owner
     if (userRoleIds.includes('1375554327988670514')) return 'co_owner';
@@ -46,6 +46,8 @@ function getPermissionLevel(member) {
     if (userRoleIds.includes('1370083070811570257')) return 'staff';
     
     return 'member';
+}
+
 }
 
 /**
